@@ -1,117 +1,217 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+JP&family=Noto+Serif&family=Playfair+Display:ital@1&family=Roboto+Mono&family=Special+Elite&family=Zilla+Slab&display=swap');
-html {
-font-family: Noto Serif, serif;
-font-size: 10px;
-font-weight: 150;
-color: black;
-background: url(https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3B4NjUwODQ3LWltYWdlLWpvYjYzMC1hXzIuanBn.jpg);
+/* Import Google Font - Poppins */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
 }
-body {
-font-size: 1.6rem;
-margin: 0 auto;
-width: 70vw;
-text-align: center;
+body{
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+  background: linear-gradient(135deg, #4AB1FF, #2D5CFE);
 }
-@media (max-width: 768px) {
-body {
-width: 100vw;
+::selection{
+  color: #fff;
+  background: #3C87FF;
 }
+.wrapper{
+  max-width: 405px;
+  padding: 28px 0 30px;
+  margin: 137px auto;
+  background: #fff;
+  border-radius: 7px;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
-@media (min-width: 1200px) {
-body {
-max-width: 700px;
+.task-input{
+  height: 52px;
+  padding: 0 25px;
+  position: relative;
 }
+.task-input img{
+  top: 50%;
+  position: absolute;
+  transform: translate(17px, -50%);
 }
-a {
-color: black;
-text-decoration: none;
+.task-input input{
+  height: 100%;
+  width: 100%;
+  outline: none;
+  font-size: 18px;
+  border-radius: 5px;
+  padding: 0 20px 0 53px;
+  border: 1px solid #999;
 }
-h1 {
-font-family: Noto Sans JP, sans-serif;
-font-size: 4rem;
-color: black;
+.task-input input:focus,
+.task-input input.active{
+  padding-left: 52px;
+  border: 2px solid #3C87FF;
 }
-.subtitle {
-font-family: Noto Sans JP, sans-serif;
-font-size: 2rem;
-color: black; 
+.task-input input::placeholder{
+  color: #bfbfbf;
 }
-h2 {
-font-family: Noto Sans JP, sans-serif;
-font-size: 2.8rem;
-margin: 50px 0 25px 0;
-text-align: center;
+.controls, li{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
-h3 {
-font-family: Noto Sans JP, sans-serif;
-font-size: 2rem;
-font-weight: 600;
-margin: 40px 0 5px 0;
-color: black;
+.controls{
+  padding: 18px 25px;
+  border-bottom: 1px solid #ccc;
 }
-section {
-text-align: left;
+.filters span{
+  margin: 0 8px;
+  font-size: 17px;
+  color: #444444;
+  cursor: pointer;
 }
-#image {
-display: block;
-max-width: 100%;
-height: auto;
-margin: 0 auto;
-border-radius: 25px;
+.filters span:first-child{
+  margin-left: 0;
 }
-#img-caption {
-font-family: Noto Sans JP, sans-serif;
-margin-top: 20px;
+.filters span.active{
+  color: #3C87FF;
+}
+.controls .clear-btn{
+  border: none;
+  opacity: 0.6;
+  outline: none;
+  color: #fff;
+  cursor: pointer;
+  font-size: 13px;
+  padding: 7px 13px;
+  border-radius: 4px;
+  letter-spacing: 0.3px;
+  pointer-events: none;
+  transition: transform 0.25s ease;
+  background: linear-gradient(135deg, #1798fb 0%, #2D5CFE 100%);
+}
+.clear-btn.active{
+  opacity: 0.9;
+  pointer-events: auto;
+}
+.clear-btn:active{
+  transform: scale(0.93);
+}
+.task-box{
+  margin-top: 20px;
+  margin-right: 5px;
+  padding: 0 20px 10px 25px;
+}
+.task-box.overflow{
+  overflow-y: auto;
+  max-height: 300px;
+}
+.task-box::-webkit-scrollbar{
+  width: 5px;
+}
+.task-box::-webkit-scrollbar-track{
+  background: #f1f1f1;
+  border-radius: 25px;
+}
+.task-box::-webkit-scrollbar-thumb{
+  background: #e6e6e6;
+  border-radius: 25px;
+}
+.task-box .task{
+  list-style: none;
+  font-size: 17px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  align-items: flex-start;
+  border-bottom: 1px solid #ccc;
+}
+.task-box .task:last-child{
+  margin-bottom: 0;
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.task-box .task label{
+  display: flex;
+  align-items: flex-start;
+}
+.task label input{
+  margin-top: 7px;
+  accent-color: #3C87FF;
+}
+.task label p{
+  user-select: none;
+  margin-left: 12px;
+  word-wrap: break-word;
+}
+.task label p.checked{
+  text-decoration: line-through;
+}
+.task-box .settings{
+  position: relative;
+}
+.settings :where(i, li){
+  cursor: pointer;
+}
+.settings .task-menu{
+  z-index: 10;
+  right: -5px;
+  bottom: -65px;
+  padding: 5px 0;
+  background: #fff;
+  position: absolute;
+  border-radius: 4px;
+  transform: scale(0);
+  transform-origin: top right;
+  box-shadow: 0 0 6px rgba(0,0,0,0.15);
+  transition: transform 0.2s ease;
+}
+.task-box .task:last-child .task-menu{
+  bottom: 0;
+  transform-origin: bottom right;
+}
+.task-box .task:first-child .task-menu{
+  bottom: -65px;
+  transform-origin: top right;
+}
+.task-menu.show{
+  transform: scale(1);
+}
+.task-menu li{
+  height: 25px;
+  font-size: 16px;
+  margin-bottom: 2px;
+  padding: 17px 15px;
+  cursor: pointer;
+  justify-content: flex-start;
+}
+.task-menu li:last-child{
+  margin-bottom: 0;
+}
+.settings li:hover{
+  background: #f5f5f5;
+}
+.settings li i{
+  padding-right: 8px;
 }
 
-
-blockquote {
-font-family: Special Elite, sans-serif;
-font-size: 2.25rem;
-background-color: rgb(230, 164, 201);
-margin: 30px 3% 0 3%;
-padding: 10px 0% 20px 0%;
-max-width: 100%;
-height: auto;
-border-radius: 25px;
-background: url(https://i.pinimg.com/originals/10/f9/44/10f944389ace361ae00a3fc6b7b16e9e.jpg)
-}
-cite {
-font-family: Noto Sans JP, sans-serif;
-font-size: 1.6rem;
-}
-
-
-.source-image {
-width: 200px;
-height: 100px;
-border-radius: 15px;
-background-color: rgb(221, 157, 190);
-margin: 0 10px 50px 10px;
-}
-.lift-animation {
-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.322);
--webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-margin-bottom: 30px;
-}
-.lift-animation::after {
-content: "";
-position: absolute;
-z-index: -1;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-box-shadow: 0 15px 15px rgba(0, 0, 0, 0.322); opacity: 0;
--webkit-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-transition: all 0.6s cubic-bezier(0.165, 0.84, 0.44, 1);
-}
-.lift-animation:hover {
-box-shadow: 15px 15px 15px rgba(0, 0, 0, 0.377);
--webkit-transform: scale(1.03, 1.03);
-transform: scale(1.03, 1.03);
-}
-.lift-animation:hover::after {
-opacity: 1;
+@media (max-width: 400px) {
+  body{
+    padding: 0 10px;
+  }
+  .wrapper {
+    padding: 20px 0;
+  }
+  .filters span{
+    margin: 0 5px;
+  }
+  .task-input{
+    padding: 0 20px;
+  }
+  .controls{
+    padding: 18px 20px;
+  }
+  .task-box{
+    margin-top: 20px;
+    margin-right: 5px;
+    padding: 0 15px 10px 20px;
+  }
+  .task label input{
+    margin-top: 4px;
+  }
 }
